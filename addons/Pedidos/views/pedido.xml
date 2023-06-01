@@ -1,0 +1,73 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="pedido_form_view">
+            <field name="name">pedido.form.view</field>
+            <field name="model">pedidos.pedido</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="nome_cliente"/>
+                            <field name="data_pedido"/>
+                            <field name="status_pedido"/>
+                        </group>
+                        <notebook>
+                            <page string="Produtos">
+                                <field name="produtos">
+                                    <tree>
+                                        <field name="nome_produto"/>
+                                        <field name="descricao"/>
+                                        <!--<field name="quantidade"/>-->
+                                        <field name="valor_unitario"/>
+                                        <!--<field name="valor_total" readonly="1"/>-->
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <footer>
+                            <field name="valor_total"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pedido_tree_view">
+            <field name="name">pedido.tree.view</field>
+            <field name="model">pedidos.pedido</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="nome_cliente"/>
+                    <field name="data_pedido"/>
+                    <field name="status_pedido"/>
+                    <field name="valor_total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="pedido_search_view">
+            <field name="name">pedido.search.view</field>
+            <field name="model">pedidos.pedido</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="nome_cliente"/>
+                    <field name="data_pedido"/>
+                    <field name="status_pedido"/>
+                    <field name="valor_total"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_pedido_list">
+            <field name="name">Pedidos</field>
+            <field name="res_model">pedidos.pedido</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(0, 0, {'view_mode': 'tree', 'view_id': ref('pedido_tree_view')})]"/>
+            <field name="search_view_id" ref="pedido_search_view"/>
+        </record>
+
+        <menuitem id="menu_pedidos" name="Pedidos" sequence="10" />
+        <menuitem id="menu_pedido" name="Pedido" parent="menu_pedidos" sequence="1" action="action_pedido_list"/>
+    </data>
+        
+</odoo>

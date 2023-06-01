@@ -8,6 +8,11 @@
     Description text
     """,
 
-    'data': [],
+    'data': ['views/pedido.xml'],
     'depends': [],
+
+    'installable': True,
+    'auto_install': False,
+    'application':True,
+    'license': 'LGPL-3',
 }
